@@ -60,14 +60,13 @@ class GlintsScraper(BaseScraper):
 
             for title in job_titles:
                 try:
-                    keyword = title.replace(" ", "%20")
-                    # Location handling for Glints is tricky via URL, usually defaults to country or specific IDs.
-                    # We'll just use keyword for now and filter later if needed, or try to pass locationName
-                    # remote_only might need specific filter ID
+                    keyword = title.replace(" ", "+")
+                    # Using the user-specified base URL format
+                    # Defaulting to Indonesia (ID) and All Cities for now as per the example
+                    search_url = f"https://glints.com/id/opportunities/jobs/explore?keyword={keyword}&country=ID&locationName=All+Cities%2FProvinces&lowestLocationLevel=1"
                     
-                    search_url = f"{self.base_url}?keyword={keyword}"
-                    if remote_only:
-                        search_url += "&remote=true" # Hypothetical param, need to verify
+                    if remote_only: # TODO: need to remove the remote only glints
+                        search_url += "&remote=true" 
                     
                     logging.info(f"Scraping Glints: {search_url}")
                     
