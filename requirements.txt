@@ -1,0 +1,11 @@
+streamlit
+playwright
+langchain
+langgraph
+langchain-openai
+langchain-community
+pymongo
+python-dotenv
+beautifulsoup4
+pandas
+lxml
