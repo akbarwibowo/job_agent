@@ -2,7 +2,11 @@ import time
 import logging
 from typing import List, Dict, Any
 from playwright.sync_api import sync_playwright
+import os
+from dotenv import load_dotenv
 from src.scrapers.base_scraper import BaseScraper
+
+load_dotenv()
 
 class GlintsScraper(BaseScraper):
     def __init__(self):
@@ -19,6 +23,41 @@ class GlintsScraper(BaseScraper):
             )
             page = context.new_page()
 
+            # Login Flow
+            try:
+                logging.info("Starting Glints Login...")
+                page.goto(self.base_url, timeout=60000)
+                
+                # 2. Click Login Button
+                page.click('//*[@id="__next"]/div[1]/div[2]/div[1]/div/div[2]/nav/div[4]/div[4]/button')
+                
+                # 3. Click "Login with Email" link
+                page.click('//*[@id="login-signup-modal"]/section/div[2]/div/div[1]/a')
+                
+                # 4. Input Email
+                email = os.getenv("GLINTS_EMAIL")
+                if not email:
+                    raise ValueError("GLINTS_EMAIL not found in .env")
+                page.fill('//*[@id="login-form-email"]', email)
+                
+                # 5. Input Password
+                password = os.getenv("GLINTS_PASSWORD")
+                if not password:
+                    raise ValueError("GLINTS_PASSWORD not found in .env")
+                page.fill('//*[@id="login-form-password"]', password)
+                
+                # 6. Click Submit Button
+                page.click('//*[@id="login-signup-modal"]/section/div[2]/div/div/div[1]/form/div[4]/button')
+                
+                logging.info("Glints Login Submitted. Waiting for navigation...")
+                page.wait_for_timeout(5000) # Wait for login to complete
+                
+            except Exception as e:
+                logging.error(f"Glints Login Failed: {e}")
+                # Continue scraping even if login fails? Or return? 
+                # For now, we'll try to continue as some jobs might be visible without login
+                pass
+
             for title in job_titles:
                 try:
                     keyword = title.replace(" ", "%20")
@@ -33,7 +72,10 @@ class GlintsScraper(BaseScraper):
                     logging.info(f"Scraping Glints: {search_url}")
                     
                     page.goto(search_url, timeout=60000)
-                    page.wait_for_selector(".JobCard-sc-", timeout=10000) # Partial class match might be needed
+                    try:
+                        page.wait_for_selector(".JobCard-sc-", timeout=10000) # Partial class match might be needed
+                    except:
+                        logging.warning("Glints job cards not found.")
                     
                     # Glints classes are often generated (sc-...), so we might need more robust selectors
                     # Looking for common attributes
