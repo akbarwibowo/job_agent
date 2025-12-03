@@ -20,16 +20,20 @@ class TestGlintsScraper(unittest.TestCase):
         locations = ["Jakarta"] # Location is hardcoded in scraper for now, but passing it anyway
         remote_only = False
         
-        jobs = self.scraper.scrape(titles, locations, remote_only)
+        jobs = self.scraper.scrape(titles, locations, remote_only, limit=5)
         
         print(f"Found {len(jobs)} jobs.")
-        for job in jobs[:3]:
-            print(job)
+        for job in jobs:
+            print(f"Title: {job['title']}")
+            print(f"Description Length: {len(job['description'])}")
+            print(f"Description Snippet: {job['description'][:100]}...")
+            print("-" * 20)
             
         self.assertTrue(len(jobs) > 0, "Should find at least one job")
         self.assertIn("title", jobs[0])
         self.assertIn("company", jobs[0])
         self.assertIn("url", jobs[0])
+        self.assertNotEqual(jobs[0]["description"], "Description not scraped", "Description should be scraped")
         
         # Export to CSV
         if jobs:

@@ -5,6 +5,7 @@ from playwright.sync_api import sync_playwright
 import os
 from dotenv import load_dotenv
 from src.scrapers.base_scraper import BaseScraper
+from bs4 import BeautifulSoup
 
 load_dotenv()
 
@@ -13,7 +14,7 @@ class GlintsScraper(BaseScraper):
         super().__init__()
         self.base_url = "https://glints.com/id/opportunities/jobs/explore"
 
-    def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool) -> List[Dict[str, Any]]:
+    def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int = None) -> List[Dict[str, Any]]:
         all_jobs = []
         
         with sync_playwright() as p:
@@ -95,12 +96,19 @@ class GlintsScraper(BaseScraper):
                     if not job_cards:
                         logging.error("No jobs found!")
                     
+                    seen_urls = set()
+                    
                     for card in job_cards:
                         try:
                             # If card is just the link (fallback)
                             if card.get_attribute("href") and "/opportunities/jobs/" in card.get_attribute("href"):
                                 title = card.inner_text().split("\n")[0] # Heuristic
                                 url = "https://glints.com" + card.get_attribute("href") if card.get_attribute("href").startswith("/") else card.get_attribute("href")
+                                
+                                if url in seen_urls:
+                                    continue
+                                seen_urls.add(url)
+
                                 job = {
                                     "title": title,
                                     "company": "Unknown", # Hard to get from just link
@@ -110,6 +118,9 @@ class GlintsScraper(BaseScraper):
                                     "description": "Description not scraped"
                                 }
                                 all_jobs.append(job)
+                                
+                                if limit and len(all_jobs) >= limit:
+                                    break
                                 continue
 
                             # Extract details using updated selectors based on HTML dump
@@ -126,15 +137,68 @@ class GlintsScraper(BaseScraper):
                             link_elem = title_elem
                             
                             if title_elem and link_elem:
+                                job_url = "https://glints.com" + link_elem.get_attribute("href") if link_elem.get_attribute("href").startswith("/") else link_elem.get_attribute("href")
+                                
+                                if job_url in seen_urls:
+                                    continue
+                                seen_urls.add(job_url)
+                                
+                                # Scrape Job Description from the job page
+                                description = "Description not scraped"
+                                try:
+                                    # Open new page for the job
+                                    job_page = context.new_page()
+                                    job_page.goto(job_url, timeout=60000)
+                                    job_page.wait_for_load_state("domcontentloaded")
+                                    
+                                    # Use BeautifulSoup to parse
+                                    soup = BeautifulSoup(job_page.content(), "html.parser")
+                                    
+                                    # Heuristic: Find "Deskripsi pekerjaan" header and "Tentang Perusahaan" header
+                                    # The description is usually between them or after "Deskripsi pekerjaan"
+                                    
+                                    # Try to find the main container
+                                    # We can look for the text "Tentang Perusahaan" and get content before it
+                                    # Or look for specific classes if we knew them. 
+                                    # Based on inspection, "Tentang Perusahaan" is a good delimiter.
+                                    
+                                    main_content = soup.find("main") or soup.find("div", {"id": "__next"})
+                                    if main_content:
+                                        text_content = main_content.get_text(separator="\n")
+                                        
+                                        # Simple parsing strategy
+                                        if "Deskripsi pekerjaan" in text_content and "Tentang Perusahaan" in text_content:
+                                            start = text_content.find("Deskripsi pekerjaan")
+                                            end = text_content.find("Tentang Perusahaan")
+                                            if start != -1 and end != -1 and end > start:
+                                                description = text_content[start:end].strip()
+                                            else:
+                                                # Fallback: just get everything before Tentang Perusahaan
+                                                description = text_content.split("Tentang Perusahaan")[0].strip()
+                                        elif "Tentang Perusahaan" in text_content:
+                                            description = text_content.split("Tentang Perusahaan")[0].strip()
+                                        else:
+                                            # Fallback if markers not found
+                                            description = text_content[:2000] # Limit length
+                                    
+                                    job_page.close()
+                                except Exception as e:
+                                    logging.error(f"Error scraping description for {job_url}: {e}")
+                                    if 'job_page' in locals():
+                                        job_page.close()
+
                                 job = {
                                     "title": title_elem.inner_text().strip(),
                                     "company": company_elem.inner_text().strip() if company_elem else "Unknown",
                                     "location": location_elem.inner_text().strip() if location_elem else "Unknown",
-                                    "url": "https://glints.com" + link_elem.get_attribute("href") if link_elem.get_attribute("href").startswith("/") else link_elem.get_attribute("href"),
+                                    "url": job_url,
                                     "source": "Glints",
-                                    "description": "Description not scraped in list view"
+                                    "description": description
                                 }
                                 all_jobs.append(job)
+                                
+                                if limit and len(all_jobs) >= limit:
+                                    break
                             else:
                                 pass # Skip incomplete cards
                         except Exception as e:
