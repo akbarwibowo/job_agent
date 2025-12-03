@@ -71,21 +71,25 @@ class GlintsScraper(BaseScraper):
                     logging.info(f"Scraping Glints: {search_url}")
                     
                     page.goto(search_url, timeout=60000)
+                    # Wait for job cards
                     try:
-                        page.wait_for_selector(".JobCard-sc-", timeout=10000) # Partial class match might be needed
+                        page.wait_for_selector("div[class*='CompactOpportunityCard']", timeout=10000)
                     except:
                         logging.warning("Glints job cards not found.")
                     
-                    # Glints classes are often generated (sc-...), so we might need more robust selectors
-                    # Looking for common attributes
-                    
-                    job_cards = page.query_selector_all("div[class*='JobCard']")
+                    # Select all job cards
+                    job_cards = page.query_selector_all("div[class*='CompactOpportunityCard']")
                     
                     for card in job_cards:
                         try:
+                            # Extract details using updated selectors
                             title_elem = card.query_selector("h3")
                             company_elem = card.query_selector("a[href*='/company/']")
-                            location_elem = card.query_selector("div[class*='Location']")
+                            
+                            # Location might be in a specific div or anchor
+                            location_elem = card.query_selector("div[class*='JobCardLocation']") or card.query_selector("a[class*='JobCardLocation']")
+                            
+                            # Link might be the card itself or an anchor inside
                             link_elem = card.query_selector("a[href*='/opportunities/jobs/']")
                             
                             if title_elem and link_elem:
