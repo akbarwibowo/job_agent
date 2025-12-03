@@ -28,11 +28,20 @@ class GlintsScraper(BaseScraper):
                 logging.info("Starting Glints Login...")
                 page.goto(self.base_url, timeout=60000)
                 
-                # 2. Click Login Button
-                page.click('//*[@id="__next"]/div[1]/div[2]/div[1]/div/div[2]/nav/div[4]/div[4]/button')
+                # 2. Click Login Button - Try multiple selectors
+                try:
+                    page.click("button:has-text('Masuk')", timeout=5000)
+                except:
+                    try:
+                        page.click("button:has-text('Login')", timeout=5000)
+                    except:
+                        # Try the specific class if text fails
+                        page.click('//*[@id="__next"]/div[1]/div[2]/div[1]/div/div[2]/nav/div[4]/div[4]/button')
                 
                 # 3. Click "Login with Email" link
-                page.click('//*[@id="login-signup-modal"]/section/div[2]/div/div[1]/a')
+                # Wait for modal to appear
+                page.wait_for_selector("div[role='dialog']", timeout=5000)
+                page.click("a:has-text('Email')") # More robust than XPath
                 
                 # 4. Input Email
                 email = os.getenv("GLINTS_EMAIL")
@@ -65,7 +74,7 @@ class GlintsScraper(BaseScraper):
                     # Defaulting to Indonesia (ID) and All Cities for now as per the example
                     search_url = f"https://glints.com/id/opportunities/jobs/explore?keyword={keyword}&country=ID&locationName=All+Cities%2FProvinces&lowestLocationLevel=1"
                     
-                    if remote_only: # TODO: need to remove the remote only glints
+                    if remote_only:
                         search_url += "&remote=true" 
                     
                     logging.info(f"Scraping Glints: {search_url}")
@@ -77,20 +86,44 @@ class GlintsScraper(BaseScraper):
                     except:
                         logging.warning("Glints job cards not found.")
                     
-                    # Select all job cards
+                    # Select all job cards - trying a broader selector if specific one fails
                     job_cards = page.query_selector_all("div[class*='CompactOpportunityCard']")
+                    if not job_cards:
+                        logging.warning("No job cards found with primary selector. Trying generic 'a' tags...")
+                        job_cards = page.query_selector_all("a[href*='/opportunities/jobs/']")
+
+                    if not job_cards:
+                        logging.error("No jobs found!")
                     
                     for card in job_cards:
                         try:
-                            # Extract details using updated selectors
-                            title_elem = card.query_selector("h3")
-                            company_elem = card.query_selector("a[href*='/company/']")
+                            # If card is just the link (fallback)
+                            if card.get_attribute("href") and "/opportunities/jobs/" in card.get_attribute("href"):
+                                title = card.inner_text().split("\n")[0] # Heuristic
+                                url = "https://glints.com" + card.get_attribute("href") if card.get_attribute("href").startswith("/") else card.get_attribute("href")
+                                job = {
+                                    "title": title,
+                                    "company": "Unknown", # Hard to get from just link
+                                    "location": "Unknown",
+                                    "url": url,
+                                    "source": "Glints",
+                                    "description": "Description not scraped"
+                                }
+                                all_jobs.append(job)
+                                continue
+
+                            # Extract details using updated selectors based on HTML dump
+                            # Title is in h2 > a
+                            title_elem = card.query_selector("h2 a")
                             
-                            # Location might be in a specific div or anchor
-                            location_elem = card.query_selector("div[class*='JobCardLocation']") or card.query_selector("a[class*='JobCardLocation']")
+                            # Company link contains /companies/ (plural)
+                            company_elem = card.query_selector("a[href*='/companies/']")
                             
-                            # Link might be the card itself or an anchor inside
-                            link_elem = card.query_selector("a[href*='/opportunities/jobs/']")
+                            # Location wrapper
+                            location_elem = card.query_selector("div[class*='CardJobLocation']")
+                            
+                            # Link is the same as title link
+                            link_elem = title_elem
                             
                             if title_elem and link_elem:
                                 job = {
@@ -102,6 +135,8 @@ class GlintsScraper(BaseScraper):
                                     "description": "Description not scraped in list view"
                                 }
                                 all_jobs.append(job)
+                            else:
+                                pass # Skip incomplete cards
                         except Exception as e:
                             continue
 
