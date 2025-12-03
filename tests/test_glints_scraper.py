@@ -1,5 +1,6 @@
 import unittest
 import os
+import pandas as pd
 from dotenv import load_dotenv
 from src.scrapers.glints_scraper import GlintsScraper
 
@@ -29,6 +30,13 @@ class TestGlintsScraper(unittest.TestCase):
         self.assertIn("title", jobs[0])
         self.assertIn("company", jobs[0])
         self.assertIn("url", jobs[0])
+        
+        # Export to CSV
+        if jobs:
+            df = pd.DataFrame(jobs)
+            csv_filename = "glints_jobs.csv"
+            df.to_csv(csv_filename, index=False)
+            print(f"Successfully exported {len(jobs)} jobs to {csv_filename}")
 
 if __name__ == '__main__':
     unittest.main()
