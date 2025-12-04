@@ -1,24 +1,22 @@
 title,company,location,url,source,description
-AI Engineer,Zando Agency,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/3dde16f6-58fc-437b-a631-acd51a6c807d?utm_referrer=explore&traceInfo=703eee49-e1d0-43ca-9655-a24d2e8a1fd5,Glints,"Deskripsi pekerjaan AI Engineer Zando Agency
-Kamu siap bangun masa depan bareng tim yang gesit, kreatif, dan haus inovasi? Kamu tipe yang excited lihat model performance naik, suka ngulik prompt sampe tengah malem, dan selalu penasaran gimana AI bisa nge-boost bisnis, maka Zando mau ketemu kamu!
-Tanggung Jawab Utama
-1. Menganalisis masalah bisnis yang kompleks dan mengubahnya menjadi permasalahan AI yang dapat diselesaikan secara teknis.
-2. Mendesain, membangun, dan mengimplementasikan aplikasi AI end-to-end menggunakan framework modern seperti LangChain, LangGraph, dan berbagai platform orkestrasi AI.
-3. Mengembangkan dan menyempurnakan Large Language Models (LLMs) serta mengoptimalkan performa melalui teknik prompt engineering untuk berbagai kebutuhan seperti otomatisasi proses, pembuatan konten, dan pengembangan kode.
-Kualifikasi
-1. Lulusan S1 atau lebih tinggi di bidang Ilmu Komputer, Matematika, Statistika, atau bidang teknis terkait.
-2. Memiliki 3–5 tahun pengalaman di bidang AI, Machine Learning, atau Data Science.
-3. Mahir dalam Python dan memiliki pengalaman dengan framework AI/ML seperti OpenAI APIs, LangChain, atau LangGraph.
-4. Pengalaman dalam deploy aplikasi di platform cloud seperti AWS, GCP, atau Azure.
-5. Pemahaman mendalam mengenai LLMs, orkestrasi AI, dan teknik prompt engineering.
-6. 
-Pernah membangun dan mengimplementasikan solusi AI end-to-end secara langsung
- (nilai plus)
-7. 
-Pengalaman dalam pengembangan front-end menggunakan framework seperti React atau Vue.js
- (nilai plus)
-8. Siap bergabung secepatnya dan penempatan di PIK 1, Jakarta Utara"
-AI Engineer,PT Abhimantra Sistem Solusindo,"Tebet, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/0ceb49d9-ac40-4dbb-b81d-31387a7d18d6?utm_referrer=explore&traceInfo=703eee49-e1d0-43ca-9655-a24d2e8a1fd5,Glints,"Deskripsi pekerjaan AI Engineer PT Abhimantra Sistem Solusindo
+AI Engineer,Maknadata,"Tanah Abang, Jakarta Pusat, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/d7353744-2e7d-402d-90f0-5e0d79f992f2?utm_referrer=explore&traceInfo=e072ab81-6396-4900-bed4-7e236aa57c19,Glints,"Deskripsi pekerjaan AI Engineer Maknadata
+Company dedicated to scaling growth through strategic implementation of data analytics and artificial intelligence. With a focus on user adoption and impactful business outcomes, we help companies navigate the complexities of integrating advanced technologies into their operations. As the adoption of AI continues to evolve rapidly, we are at the forefront of addressing the challenges this transition presents, ensuring our clients achieve their growth objectives.
+We are currently seeking an AI Engineer to join our dynamic team. In this pivotal role, you will play a crucial part in shaping the future of data-driven solutions. Our hybrid work environment offers the flexibility to balance remote and office-based collaboration, fostering a culture of innovation and continuous learning. This position is ideal for someone who thrives in a fast-paced, results-oriented environment and is eager to contribute to groundbreaking projects.
+Key Responsibilities:
+- Design and develop AI models that enhance operational efficiency and drive business growth.
+- Collaborate with cross-functional teams to ensure AI solutions meet user needs and deliver measurable outcomes.
+- Implement machine learning algorithms and integrate them into existing systems.
+- Conduct performance analysis and refine AI models for optimal results.
+- Stay updated with the latest trends and advancements in AI and data science to continuously improve our offerings.
+Qualifications:
+- Bachelor’s degree in Computer Science, Data Science, or a related field.
+- Between 1 to 3 years of experience in AI engineering or a closely related role.
+- Proficiency in Redis, Machine Learning, and Artificial Intelligence.
+- Strong problem-solving skills and a passion for creating impactful AI solutions.
+- Experience working in a hybrid work environment is a plus.
+- A collaborative mindset and a commitment to excellence in delivering high-quality results.
+Join us at Maknadata, where your expertise can make a significant difference in the way businesses leverage AI and data analytics. We offer a supportive environment that encourages professional growth and innovation, making this an exciting opportunity for an ambitious AI Engineer."
+AI Engineer,PT Abhimantra Sistem Solusindo,"Tebet, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/0ceb49d9-ac40-4dbb-b81d-31387a7d18d6?utm_referrer=explore&traceInfo=e072ab81-6396-4900-bed4-7e236aa57c19,Glints,"Deskripsi pekerjaan AI Engineer PT Abhimantra Sistem Solusindo
 Job Descriptions
 Mengembangkan dan mengimplementasikan model AI/ML untuk kebutuhan analisis data dan chatbot.
 Menangani preprocessing data & deployment model ke production environment.
@@ -29,7 +27,7 @@ Memiliki sertifikasi BNSP atau sertifikasi resmi instansi pemerintahan terkait A
 Menguasai Python (TensorFlow, PyTorch, Scikit-learn).
 Berpengalaman dalam NLP & integrasi model ke sistem produksi.
 Bersedia bekerja sesuai kontrak jangka waktu proyek."
-AI Engineer,PT Midory Cipta Kreasi,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/b8c708e2-c295-4e98-b653-a0f70eee2bcc?utm_referrer=explore&traceInfo=703eee49-e1d0-43ca-9655-a24d2e8a1fd5,Glints,"Deskripsi pekerjaan AI Engineer PT Midory Cipta Kreasi
+AI Engineer,PT Midory Cipta Kreasi,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/b8c708e2-c295-4e98-b653-a0f70eee2bcc?utm_referrer=explore&traceInfo=e072ab81-6396-4900-bed4-7e236aa57c19,Glints,"Deskripsi pekerjaan AI Engineer PT Midory Cipta Kreasi
 OPEN RECRUITMENT FOR : AI ENGINEER
 PT Midory Cipta Kreasi sedang mencari individu berbakat dan berdedikasi untuk bergabung dalam tim kami sebagai AI Engineer di divisi Computer Vision. Posisi ini memberikan kesempatan untuk bekerja di lingkungan yang inovatif, dinamis, dan kolaboratif, dengan proyek-proyek yang berkontribusi langsung pada perkembangan teknologi AI yang mutakhir.
 Tanggung Jawab:
@@ -51,7 +49,7 @@ Keahlian Tambahan:
 Soft Skills:
 - Kemampuan komunikasi yang baik dan kemampuan untuk bekerja dalam tim.
 - Kreatif dalam memecahkan masalah dan proaktif dalam mencari solusi."
-AI Engineer,Pt Boer Technology,"Bogor Utara, Bogor, Jawa Barat",https://glints.com/id/opportunities/jobs/ai-engineer/c2bc2467-99b7-4220-8d3e-bc4e110f1d2c?utm_referrer=explore&traceInfo=703eee49-e1d0-43ca-9655-a24d2e8a1fd5,Glints,"Deskripsi pekerjaan AI Engineer Pt Boer Technology
+AI Engineer,Pt Boer Technology,"Bogor Utara, Bogor, Jawa Barat",https://glints.com/id/opportunities/jobs/ai-engineer/c2bc2467-99b7-4220-8d3e-bc4e110f1d2c?utm_referrer=explore&traceInfo=e072ab81-6396-4900-bed4-7e236aa57c19,Glints,"Deskripsi pekerjaan AI Engineer Pt Boer Technology
 Kualifikasi:
 Pendidikan minimal D3 bidang teknik informatika, sistem informasi, ilmu komputer, teknologi informasi, statistika, matematika, teknik industri atau jurusan setara terkait bidang studi Information Technology.
 Pengalaman kerja minimal 2 tahun di bidang data operation atau development.
@@ -69,20 +67,22 @@ Menguasai proses automasi (monitoring, alert, notification, analisis) terkait de
 Menguasai performance improvement dan tuning pada platform data berbasis web server, API, Tableau Server, 
 Micosoft Reporting Service maupun server untuk memenuhi kebutuhan platform 
 Menguasai tools yang digunakan untuk menjalankan daily operations seperti ELK Stack, Grafana, DB Monitoring, Confluence, JIRA"
-AI Engineer,PT Trees Solutions,"Pancoran, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/dc60262a-6d2b-4e3d-9596-5cb06c46c600?utm_referrer=explore&traceInfo=703eee49-e1d0-43ca-9655-a24d2e8a1fd5,Glints,"Deskripsi pekerjaan AI Engineer PT Trees Solutions
-Responsibilities
- Design, build, and optimize LLM-based applications using frameworks such as LangChain and LangGraph.
- Develop and maintain the orchestration layer in Python for managing multiple AI workflows.
- Build and deploy RESTful APIs using FastAPI to integrate AI models into scalable services.
- Fine-tune, evaluate, and integrate open-source and proprietary LLMs (e.g., GPT, Claude, Gemini, LLaMA).
- Collaborate with product, data, and backend teams to embed AI capabilities into user-facing applications.
- Implement prompt engineering, context management, and memory for multi-agent systems.
- Monitor model performance and continuously improve response quality and latency.
-Requirements
- Strong proficiency in Python and familiarity with asynchronous programming.
- Experience with FastAPI for API development and deployment.
- Hands-on experience with LangChain, LangGraph, or similar LLM orchestration frameworks.
- Understanding of LLM concepts such as embeddings, vector stores, retrieval-augmented generation (RAG), and prompt templates.
- Familiarity with cloud platforms (AWS, GCP, Azure) and containerization tools (Docker, Kubernetes) is a plus.
- Solid foundation in machine learning and understanding of transformer-based architectures.
- Excellent problem-solving and collaboration skills."
+AI Engineer,Zando Agency,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/3dde16f6-58fc-437b-a631-acd51a6c807d?utm_referrer=explore&traceInfo=e072ab81-6396-4900-bed4-7e236aa57c19,Glints,"Deskripsi pekerjaan AI Engineer Zando Agency
+Kamu siap bangun masa depan bareng tim yang gesit, kreatif, dan haus inovasi? Kamu tipe yang excited lihat model performance naik, suka ngulik prompt sampe tengah malem, dan selalu penasaran gimana AI bisa nge-boost bisnis, maka Zando mau ketemu kamu!
+Tanggung Jawab Utama
+1. Menganalisis masalah bisnis yang kompleks dan mengubahnya menjadi permasalahan AI yang dapat diselesaikan secara teknis.
+2. Mendesain, membangun, dan mengimplementasikan aplikasi AI end-to-end menggunakan framework modern seperti LangChain, LangGraph, dan berbagai platform orkestrasi AI.
+3. Mengembangkan dan menyempurnakan Large Language Models (LLMs) serta mengoptimalkan performa melalui teknik prompt engineering untuk berbagai kebutuhan seperti otomatisasi proses, pembuatan konten, dan pengembangan kode.
+Kualifikasi
+1. Lulusan S1 atau lebih tinggi di bidang Ilmu Komputer, Matematika, Statistika, atau bidang teknis terkait.
+2. Memiliki 3–5 tahun pengalaman di bidang AI, Machine Learning, atau Data Science.
+3. Mahir dalam Python dan memiliki pengalaman dengan framework AI/ML seperti OpenAI APIs, LangChain, atau LangGraph.
+4. Pengalaman dalam deploy aplikasi di platform cloud seperti AWS, GCP, atau Azure.
+5. Pemahaman mendalam mengenai LLMs, orkestrasi AI, dan teknik prompt engineering.
+6. 
+Pernah membangun dan mengimplementasikan solusi AI end-to-end secara langsung
+ (nilai plus)
+7. 
+Pengalaman dalam pengembangan front-end menggunakan framework seperti React atau Vue.js
+ (nilai plus)
+8. Siap bergabung secepatnya dan penempatan di PIK 1, Jakarta Utara"

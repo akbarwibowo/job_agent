@@ -1,8 +1,8 @@
-import time
+import asyncio
 import logging
-from typing import List, Dict, Any
-from playwright.sync_api import sync_playwright
 import os
+from typing import List, Dict, Any
+from playwright.async_api import async_playwright
 from dotenv import load_dotenv
 from src.scrapers.base_scraper import BaseScraper
 from bs4 import BeautifulSoup
@@ -15,64 +15,71 @@ class GlintsScraper(BaseScraper):
         self.base_url = "https://glints.com/id/opportunities/jobs/explore"
 
     def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int = None) -> List[Dict[str, Any]]:
+        """
+        Synchronous wrapper for the async scraping logic.
+        """
+        return asyncio.run(self.scrape_async(job_titles, locations, remote_only, limit))
+
+    async def scrape_async(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int = None) -> List[Dict[str, Any]]:
         all_jobs = []
         
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            context = browser.new_context(
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            context = await browser.new_context(
                 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             )
-            page = context.new_page()
+            page = await context.new_page()
 
             # Login Flow
             try:
                 logging.info("Starting Glints Login...")
-                page.goto(self.base_url, timeout=60000)
+                await page.goto(self.base_url, timeout=60000)
                 
-                # 2. Click Login Button - Try multiple selectors
+                # 2. Click Login Button
                 try:
-                    page.click("button:has-text('Masuk')", timeout=5000)
+                    await page.click("button:has-text('Masuk')", timeout=5000)
                 except:
                     try:
-                        page.click("button:has-text('Login')", timeout=5000)
+                        await page.click("button:has-text('Login')", timeout=5000)
                     except:
-                        # Try the specific class if text fails
-                        page.click('//*[@id="__next"]/div[1]/div[2]/div[1]/div/div[2]/nav/div[4]/div[4]/button')
+                        await page.click('//*[@id="__next"]/div[1]/div[2]/div[1]/div/div[2]/nav/div[4]/div[4]/button')
                 
                 # 3. Click "Login with Email" link
-                # Wait for modal to appear
-                page.wait_for_selector("div[role='dialog']", timeout=5000)
-                page.click("a:has-text('Email')") # More robust than XPath
+                await page.wait_for_selector("div[role='dialog']", timeout=5000)
+                await page.click("a:has-text('Email')")
                 
                 # 4. Input Email
                 email = os.getenv("GLINTS_EMAIL")
                 if not email:
                     raise ValueError("GLINTS_EMAIL not found in .env")
-                page.fill('//*[@id="login-form-email"]', email)
+                await page.fill('//*[@id="login-form-email"]', email)
                 
                 # 5. Input Password
                 password = os.getenv("GLINTS_PASSWORD")
                 if not password:
                     raise ValueError("GLINTS_PASSWORD not found in .env")
-                page.fill('//*[@id="login-form-password"]', password)
+                await page.fill('//*[@id="login-form-password"]', password)
                 
                 # 6. Click Submit Button
-                page.click('//*[@id="login-signup-modal"]/section/div[2]/div/div/div[1]/form/div[4]/button')
+                await page.click('//*[@id="login-signup-modal"]/section/div[2]/div/div/div[1]/form/div[4]/button')
                 
                 logging.info("Glints Login Submitted. Waiting for navigation...")
-                page.wait_for_timeout(5000) # Wait for login to complete
+                await page.wait_for_timeout(5000)
                 
             except Exception as e:
                 logging.error(f"Glints Login Failed: {e}")
-                # Continue scraping even if login fails? Or return? 
-                # For now, we'll try to continue as some jobs might be visible without login
                 pass
+
+            queue = asyncio.Queue()
+            seen_urls = set()
+            
+            # Start consumers (workers)
+            # 5 concurrent workers
+            consumers = [asyncio.create_task(self.worker(context, queue, all_jobs)) for _ in range(5)]
 
             for title in job_titles:
                 try:
                     keyword = title.replace(" ", "+")
-                    # Using the user-specified base URL format
-                    # Defaulting to Indonesia (ID) and All Cities for now as per the example
                     search_url = f"https://glints.com/id/opportunities/jobs/explore?keyword={keyword}&country=ID&locationName=All+Cities%2FProvinces&lowestLocationLevel=1"
                     
                     if remote_only:
@@ -80,133 +87,140 @@ class GlintsScraper(BaseScraper):
                     
                     logging.info(f"Scraping Glints: {search_url}")
                     
-                    page.goto(search_url, timeout=60000)
-                    # Wait for job cards
+                    await page.goto(search_url, timeout=60000)
+                    
                     try:
-                        page.wait_for_selector("div[class*='CompactOpportunityCard']", timeout=10000)
+                        await page.wait_for_selector("div[class*='CompactOpportunityCard']", timeout=10000)
                     except:
                         logging.warning("Glints job cards not found.")
-                    
-                    # Select all job cards - trying a broader selector if specific one fails
-                    job_cards = page.query_selector_all("div[class*='CompactOpportunityCard']")
-                    if not job_cards:
-                        logging.warning("No job cards found with primary selector. Trying generic 'a' tags...")
-                        job_cards = page.query_selector_all("a[href*='/opportunities/jobs/']")
 
-                    if not job_cards:
-                        logging.error("No jobs found!")
+                    last_height = await page.evaluate("document.body.scrollHeight")
                     
-                    seen_urls = set()
-                    
-                    for card in job_cards:
-                        try:
-                            # If card is just the link (fallback)
-                            if card.get_attribute("href") and "/opportunities/jobs/" in card.get_attribute("href"):
-                                title = card.inner_text().split("\n")[0] # Heuristic
-                                url = "https://glints.com" + card.get_attribute("href") if card.get_attribute("href").startswith("/") else card.get_attribute("href")
+                    while True:
+                        # Re-query cards
+                        job_cards = await page.query_selector_all("div[class*='CompactOpportunityCard']")
+                        if not job_cards:
+                            job_cards = await page.query_selector_all("a[href*='/opportunities/jobs/']")
+                        
+                        new_jobs_found_in_this_batch = False
+                        
+                        for card in job_cards:
+                            try:
+                                # Extract basic info
+                                card_href = await card.get_attribute("href")
+                                if not card_href:
+                                    link_elem = await card.query_selector("h2 a") or await card.query_selector("a[href*='/opportunities/jobs/']")
+                                    if link_elem:
+                                        card_href = await link_elem.get_attribute("href")
                                 
-                                if url in seen_urls:
+                                if not card_href:
                                     continue
-                                seen_urls.add(url)
-
-                                job = {
-                                    "title": title,
-                                    "company": "Unknown", # Hard to get from just link
-                                    "location": "Unknown",
-                                    "url": url,
-                                    "source": "Glints",
-                                    "description": "Description not scraped"
-                                }
-                                all_jobs.append(job)
-                                
-                                if limit and len(all_jobs) >= limit:
-                                    break
-                                continue
-
-                            # Extract details using updated selectors based on HTML dump
-                            # Title is in h2 > a
-                            title_elem = card.query_selector("h2 a")
-                            
-                            # Company link contains /companies/ (plural)
-                            company_elem = card.query_selector("a[href*='/companies/']")
-                            
-                            # Location wrapper
-                            location_elem = card.query_selector("div[class*='CardJobLocation']")
-                            
-                            # Link is the same as title link
-                            link_elem = title_elem
-                            
-                            if title_elem and link_elem:
-                                job_url = "https://glints.com" + link_elem.get_attribute("href") if link_elem.get_attribute("href").startswith("/") else link_elem.get_attribute("href")
+                                    
+                                job_url = "https://glints.com" + card_href if card_href.startswith("/") else card_href
                                 
                                 if job_url in seen_urls:
                                     continue
-                                seen_urls.add(job_url)
                                 
-                                # Scrape Job Description from the job page
-                                description = "Description not scraped"
-                                try:
-                                    # Open new page for the job
-                                    job_page = context.new_page()
-                                    job_page.goto(job_url, timeout=60000)
-                                    job_page.wait_for_load_state("domcontentloaded")
-                                    
-                                    # Use BeautifulSoup to parse
-                                    soup = BeautifulSoup(job_page.content(), "html.parser")
-                                    
-                                    # Heuristic: Find "Deskripsi pekerjaan" header and "Tentang Perusahaan" header
-                                    # The description is usually between them or after "Deskripsi pekerjaan"
-                                    
-                                    # Try to find the main container
-                                    # We can look for the text "Tentang Perusahaan" and get content before it
-                                    # Or look for specific classes if we knew them. 
-                                    # Based on inspection, "Tentang Perusahaan" is a good delimiter.
-                                    
-                                    main_content = soup.find("main") or soup.find("div", {"id": "__next"})
-                                    if main_content:
-                                        text_content = main_content.get_text(separator="\n")
-                                        
-                                        # Simple parsing strategy
-                                        if "Deskripsi pekerjaan" in text_content and "Tentang Perusahaan" in text_content:
-                                            start = text_content.find("Deskripsi pekerjaan")
-                                            end = text_content.find("Tentang Perusahaan")
-                                            if start != -1 and end != -1 and end > start:
-                                                description = text_content[start:end].strip()
-                                            else:
-                                                # Fallback: just get everything before Tentang Perusahaan
-                                                description = text_content.split("Tentang Perusahaan")[0].strip()
-                                        elif "Tentang Perusahaan" in text_content:
-                                            description = text_content.split("Tentang Perusahaan")[0].strip()
-                                        else:
-                                            # Fallback if markers not found
-                                            description = text_content[:2000] # Limit length
-                                    
-                                    job_page.close()
-                                except Exception as e:
-                                    logging.error(f"Error scraping description for {job_url}: {e}")
-                                    if 'job_page' in locals():
-                                        job_page.close()
-
-                                job = {
-                                    "title": title_elem.inner_text().strip(),
-                                    "company": company_elem.inner_text().strip() if company_elem else "Unknown",
-                                    "location": location_elem.inner_text().strip() if location_elem else "Unknown",
+                                seen_urls.add(job_url)
+                                new_jobs_found_in_this_batch = True
+                                
+                                # Extract details for the job object
+                                title_elem = await card.query_selector("h2 a")
+                                company_elem = await card.query_selector("a[href*='/companies/']")
+                                location_elem = await card.query_selector("div[class*='CardJobLocation']")
+                                
+                                job_basic = {
+                                    "title": (await title_elem.inner_text()).strip() if title_elem else (await card.inner_text()).split("\n")[0],
+                                    "company": (await company_elem.inner_text()).strip() if company_elem else "Unknown",
+                                    "location": (await location_elem.inner_text()).strip() if location_elem else "Unknown",
                                     "url": job_url,
                                     "source": "Glints",
-                                    "description": description
+                                    "description": "Description not scraped" # Will be updated by worker
                                 }
-                                all_jobs.append(job)
                                 
-                                if limit and len(all_jobs) >= limit:
+                                # Put into queue for processing
+                                await queue.put(job_basic)
+                                
+                                if limit and len(seen_urls) >= limit:
                                     break
-                            else:
-                                pass # Skip incomplete cards
-                        except Exception as e:
-                            continue
-
+                            except Exception as e:
+                                logging.error(f"Error processing card: {e}")
+                                continue
+                        
+                        if limit and len(seen_urls) >= limit:
+                            break
+                            
+                        # Scroll down
+                        await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                        await page.wait_for_timeout(2000)
+                        
+                        # Check if we reached bottom
+                        new_height = await page.evaluate("document.body.scrollHeight")
+                        if new_height == last_height and not new_jobs_found_in_this_batch:
+                            logging.info("Reached end of infinite scroll.")
+                            break
+                        last_height = new_height
+                        
                 except Exception as e:
                     logging.error(f"Error scraping {title}: {e}")
+
+            # Wait for all jobs in queue to be processed
+            await queue.join()
             
-            browser.close()
+            # Cancel consumers
+            for c in consumers:
+                c.cancel()
             
-        return all_jobs
+            await browser.close()
+            
+            # If limit was applied, trim the result (though seen_urls check should handle it mostly)
+            if limit:
+                return all_jobs[:limit]
+            return all_jobs
+
+    async def worker(self, context, queue, all_jobs):
+        while True:
+            job = await queue.get()
+            try:
+                job_url = job['url']
+                description = "Description not scraped"
+                
+                try:
+                    page = await context.new_page()
+                    await page.goto(job_url, timeout=60000)
+                    try:
+                        await page.wait_for_load_state("domcontentloaded", timeout=10000)
+                    except:
+                        pass # Proceed even if timeout, content might be there
+                    
+                    content = await page.content()
+                    soup = BeautifulSoup(content, "html.parser")
+                    
+                    main_content = soup.find("main") or soup.find("div", {"id": "__next"})
+                    if main_content:
+                        text_content = main_content.get_text(separator="\n")
+                        if "Deskripsi pekerjaan" in text_content and "Tentang Perusahaan" in text_content:
+                            start = text_content.find("Deskripsi pekerjaan")
+                            end = text_content.find("Tentang Perusahaan")
+                            if start != -1 and end != -1 and end > start:
+                                description = text_content[start:end].strip()
+                            else:
+                                description = text_content.split("Tentang Perusahaan")[0].strip()
+                        elif "Tentang Perusahaan" in text_content:
+                            description = text_content.split("Tentang Perusahaan")[0].strip()
+                        else:
+                            description = text_content[:2000]
+                    
+                    await page.close()
+                except Exception as e:
+                    logging.error(f"Worker error for {job_url}: {e}")
+                    if 'page' in locals():
+                        await page.close()
+                
+                job['description'] = description
+                all_jobs.append(job)
+                
+            except Exception as e:
+                logging.error(f"Worker critical error: {e}")
+            finally:
+                queue.task_done()
