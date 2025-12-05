@@ -24,7 +24,7 @@ class GlintsScraper(BaseScraper):
         all_jobs = []
         
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(
                 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             )
@@ -71,12 +71,13 @@ class GlintsScraper(BaseScraper):
                 pass
 
             queue = asyncio.Queue()
-            seen_urls = set()
+            seen_all_urls = set()
             
             # Start consumers (workers)
             # 5 concurrent workers
             consumers = [asyncio.create_task(self.worker(context, queue, all_jobs)) for _ in range(5)]
-
+            
+            limit_per_job = limit // len(job_titles)
             for title in job_titles:
                 try:
                     keyword = title.replace(" ", "+")
@@ -95,7 +96,8 @@ class GlintsScraper(BaseScraper):
                         logging.warning("Glints job cards not found.")
 
                     last_height = await page.evaluate("document.body.scrollHeight")
-                    
+
+                    seen_job_urls = set()
                     while True:
                         # Re-query cards
                         job_cards = await page.query_selector_all("div[class*='CompactOpportunityCard']")
@@ -118,10 +120,10 @@ class GlintsScraper(BaseScraper):
                                     
                                 job_url = "https://glints.com" + card_href if card_href.startswith("/") else card_href
                                 
-                                if job_url in seen_urls:
+                                if job_url in seen_job_urls:
                                     continue
                                 
-                                seen_urls.add(job_url)
+                                seen_job_urls.add(job_url)
                                 new_jobs_found_in_this_batch = True
                                 
                                 # Extract details for the job object
@@ -141,13 +143,14 @@ class GlintsScraper(BaseScraper):
                                 # Put into queue for processing
                                 await queue.put(job_basic)
                                 
-                                if limit and len(seen_urls) >= limit:
+                                if limit_per_job and len(seen_job_urls) >= limit_per_job:
+                                    seen_all_urls.update(seen_job_urls)
                                     break
                             except Exception as e:
                                 logging.error(f"Error processing card: {e}")
                                 continue
                         
-                        if limit and len(seen_urls) >= limit:
+                        if limit_per_job and len(seen_job_urls) >= limit_per_job:
                             break
                             
                         # Scroll down

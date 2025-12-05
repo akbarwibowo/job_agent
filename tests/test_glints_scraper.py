@@ -16,11 +16,11 @@ class TestGlintsScraper(unittest.TestCase):
             print("Skipping test: GLINTS_EMAIL or GLINTS_PASSWORD not set.")
             return
 
-        titles = ["AI Engineer"]
+        titles = ["AI Engineer", "Data Scientist"]
         locations = ["Jakarta"] # Location is hardcoded in scraper for now, but passing it anyway
         remote_only = False
         
-        jobs = self.scraper.scrape(titles, locations, remote_only, limit=5)
+        jobs = self.scraper.scrape(titles, locations, remote_only, limit=10)
         
         print(f"Found {len(jobs)} jobs.")
         for job in jobs:
