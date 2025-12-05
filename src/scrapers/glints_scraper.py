@@ -14,13 +14,13 @@ class GlintsScraper(BaseScraper):
         super().__init__()
         self.base_url = "https://glints.com/id/opportunities/jobs/explore"
 
-    def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int = None) -> List[Dict[str, Any]]:
+    def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int | None = None) -> List[Dict[str, Any]]:
         """
         Synchronous wrapper for the async scraping logic.
         """
         return asyncio.run(self.scrape_async(job_titles, locations, remote_only, limit))
 
-    async def scrape_async(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int = None) -> List[Dict[str, Any]]:
+    async def scrape_async(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int | None = None) -> List[Dict[str, Any]]:
         all_jobs = []
         
         async with async_playwright() as p:
@@ -77,7 +77,7 @@ class GlintsScraper(BaseScraper):
             # 5 concurrent workers
             consumers = [asyncio.create_task(self.worker(context, queue, all_jobs)) for _ in range(5)]
             
-            limit_per_job = limit // len(job_titles)
+            limit_per_job = limit // len(job_titles) if limit is not None else 100
             for title in job_titles:
                 try:
                     keyword = title.replace(" ", "+")
@@ -188,6 +188,7 @@ class GlintsScraper(BaseScraper):
                 job_url = job['url']
                 description = "Description not scraped"
                 
+                page = None
                 try:
                     page = await context.new_page()
                     await page.goto(job_url, timeout=60000)
@@ -214,10 +215,11 @@ class GlintsScraper(BaseScraper):
                         else:
                             description = text_content[:2000]
                     
-                    await page.close()
+                    if page is not None:
+                        await page.close()
                 except Exception as e:
                     logging.error(f"Worker error for {job_url}: {e}")
-                    if 'page' in locals():
+                    if page is not None:
                         await page.close()
                 
                 job['description'] = description

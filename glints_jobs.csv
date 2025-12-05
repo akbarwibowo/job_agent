@@ -1,5 +1,35 @@
 title,company,location,url,source,description
-AI Engineer,Maknadata,"Tanah Abang, Jakarta Pusat, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/d7353744-2e7d-402d-90f0-5e0d79f992f2?utm_referrer=explore&traceInfo=14455c80-b446-4146-8439-445177ca015e,Glints,"Deskripsi pekerjaan AI Engineer Maknadata
+AI Engineer,PT Abhimantra Sistem Solusindo,"Tebet, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/0ceb49d9-ac40-4dbb-b81d-31387a7d18d6?utm_referrer=explore&traceInfo=94bf963d-4874-4fae-8d45-73bf1c2738b5,Glints,"Deskripsi pekerjaan AI Engineer PT Abhimantra Sistem Solusindo
+Job Descriptions
+Mengembangkan dan mengimplementasikan model AI/ML untuk kebutuhan analisis data dan chatbot.
+Menangani preprocessing data & deployment model ke production environment.
+Mengoptimalkan kinerja model agar sesuai dengan kebutuhan bisnis dan pengguna akhir.
+Job Requirements
+Min. S1 Teknik Informatika / Data Science / terkait.
+Memiliki sertifikasi BNSP atau sertifikasi resmi instansi pemerintahan terkait AI/ML.
+Menguasai Python (TensorFlow, PyTorch, Scikit-learn).
+Berpengalaman dalam NLP & integrasi model ke sistem produksi.
+Bersedia bekerja sesuai kontrak jangka waktu proyek."
+AI Engineer,Zando Agency,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/3dde16f6-58fc-437b-a631-acd51a6c807d?utm_referrer=explore&traceInfo=94bf963d-4874-4fae-8d45-73bf1c2738b5,Glints,"Deskripsi pekerjaan AI Engineer Zando Agency
+Kamu siap bangun masa depan bareng tim yang gesit, kreatif, dan haus inovasi? Kamu tipe yang excited lihat model performance naik, suka ngulik prompt sampe tengah malem, dan selalu penasaran gimana AI bisa nge-boost bisnis, maka Zando mau ketemu kamu!
+Tanggung Jawab Utama
+1. Menganalisis masalah bisnis yang kompleks dan mengubahnya menjadi permasalahan AI yang dapat diselesaikan secara teknis.
+2. Mendesain, membangun, dan mengimplementasikan aplikasi AI end-to-end menggunakan framework modern seperti LangChain, LangGraph, dan berbagai platform orkestrasi AI.
+3. Mengembangkan dan menyempurnakan Large Language Models (LLMs) serta mengoptimalkan performa melalui teknik prompt engineering untuk berbagai kebutuhan seperti otomatisasi proses, pembuatan konten, dan pengembangan kode.
+Kualifikasi
+1. Lulusan S1 atau lebih tinggi di bidang Ilmu Komputer, Matematika, Statistika, atau bidang teknis terkait.
+2. Memiliki 3–5 tahun pengalaman di bidang AI, Machine Learning, atau Data Science.
+3. Mahir dalam Python dan memiliki pengalaman dengan framework AI/ML seperti OpenAI APIs, LangChain, atau LangGraph.
+4. Pengalaman dalam deploy aplikasi di platform cloud seperti AWS, GCP, atau Azure.
+5. Pemahaman mendalam mengenai LLMs, orkestrasi AI, dan teknik prompt engineering.
+6. 
+Pernah membangun dan mengimplementasikan solusi AI end-to-end secara langsung
+ (nilai plus)
+7. 
+Pengalaman dalam pengembangan front-end menggunakan framework seperti React atau Vue.js
+ (nilai plus)
+8. Siap bergabung secepatnya dan penempatan di PIK 1, Jakarta Utara"
+AI Engineer,Maknadata,"Tanah Abang, Jakarta Pusat, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/d7353744-2e7d-402d-90f0-5e0d79f992f2?utm_referrer=explore&traceInfo=94bf963d-4874-4fae-8d45-73bf1c2738b5,Glints,"Deskripsi pekerjaan AI Engineer Maknadata
 Company dedicated to scaling growth through strategic implementation of data analytics and artificial intelligence. With a focus on user adoption and impactful business outcomes, we help companies navigate the complexities of integrating advanced technologies into their operations. As the adoption of AI continues to evolve rapidly, we are at the forefront of addressing the challenges this transition presents, ensuring our clients achieve their growth objectives.
 We are currently seeking an AI Engineer to join our dynamic team. In this pivotal role, you will play a crucial part in shaping the future of data-driven solutions. Our hybrid work environment offers the flexibility to balance remote and office-based collaboration, fostering a culture of innovation and continuous learning. This position is ideal for someone who thrives in a fast-paced, results-oriented environment and is eager to contribute to groundbreaking projects.
 Key Responsibilities:
@@ -16,7 +46,25 @@ Qualifications:
 - Experience working in a hybrid work environment is a plus.
 - A collaborative mindset and a commitment to excellence in delivering high-quality results.
 Join us at Maknadata, where your expertise can make a significant difference in the way businesses leverage AI and data analytics. We offer a supportive environment that encourages professional growth and innovation, making this an exciting opportunity for an ambitious AI Engineer."
-AI Engineer,PT Midory Cipta Kreasi,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/b8c708e2-c295-4e98-b653-a0f70eee2bcc?utm_referrer=explore&traceInfo=14455c80-b446-4146-8439-445177ca015e,Glints,"Deskripsi pekerjaan AI Engineer PT Midory Cipta Kreasi
+AI Engineer,Pt Boer Technology,"Bogor Utara, Bogor, Jawa Barat",https://glints.com/id/opportunities/jobs/ai-engineer/c2bc2467-99b7-4220-8d3e-bc4e110f1d2c?utm_referrer=explore&traceInfo=94bf963d-4874-4fae-8d45-73bf1c2738b5,Glints,"Deskripsi pekerjaan AI Engineer Pt Boer Technology
+Kualifikasi:
+Pendidikan minimal D3 bidang teknik informatika, sistem informasi, ilmu komputer, teknologi informasi, statistika, matematika, teknik industri atau jurusan setara terkait bidang studi Information Technology.
+Pengalaman kerja minimal 2 tahun di bidang data operation atau development.
+Pengalaman dan menguasai dalam mengelola infrastruktur configuration (server & network), OS configuration (Linux & Windows servers), containerized ecosystem (Docker, Kubernetes).
+Pengalaman dan menguasai dalam mengelola API berbasis GraphQL 
+Pengalaman dan menguasai di level advanced / professional terkait platform database dan kubernetes. 
+Menguasai query dan optimasi SQL & NOSQL (database cluster & non-cluster) 
+Menguasai teknologi CI/CD seperti Jenkins dan Bamboo untuk mendukung proses deployment model dan aplikasi AI/ML
+Menguasai teknologi automation seperti Ansible 
+Menguasai configuration dan optimasi platform data berbasis containerized API (high availability dan clustering) 
+Melakukan analisis data growth dan traffic service untuk memberikan suggestion terkait capacity planning dan management
+Mampu menyusun dan mempresentasikan analisa, rekomendasi & insight terkait aplikasi berbasis containerized API secara keseluruhan kepada tim teknis dan bisnis atau non-teknis dalam bentuk presentasi, dokumen, atau reguler report 
+Melakukan pengecekan di level detail object platform aplikasi berbasis containerized API untuk mengidentifikasi suatu atau potensi issue / problem. Memiliki kemampuan menentukan solusi permanen sebagai langkah solving issue maupun langkah perbaikan berkelanjutan 
+Menguasai proses automasi (monitoring, alert, notification, analisis) terkait dengan platform berbasis containerized API 
+Menguasai performance improvement dan tuning pada platform data berbasis web server, API, Tableau Server, 
+Micosoft Reporting Service maupun server untuk memenuhi kebutuhan platform 
+Menguasai tools yang digunakan untuk menjalankan daily operations seperti ELK Stack, Grafana, DB Monitoring, Confluence, JIRA"
+AI Engineer,PT Midory Cipta Kreasi,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/b8c708e2-c295-4e98-b653-a0f70eee2bcc?utm_referrer=explore&traceInfo=94bf963d-4874-4fae-8d45-73bf1c2738b5,Glints,"Deskripsi pekerjaan AI Engineer PT Midory Cipta Kreasi
 OPEN RECRUITMENT FOR : AI ENGINEER
 PT Midory Cipta Kreasi sedang mencari individu berbakat dan berdedikasi untuk bergabung dalam tim kami sebagai AI Engineer di divisi Computer Vision. Posisi ini memberikan kesempatan untuk bekerja di lingkungan yang inovatif, dinamis, dan kolaboratif, dengan proyek-proyek yang berkontribusi langsung pada perkembangan teknologi AI yang mutakhir.
 Tanggung Jawab:
@@ -38,71 +86,73 @@ Keahlian Tambahan:
 Soft Skills:
 - Kemampuan komunikasi yang baik dan kemampuan untuk bekerja dalam tim.
 - Kreatif dalam memecahkan masalah dan proaktif dalam mencari solusi."
-AI Engineer,Pt Boer Technology,"Bogor Utara, Bogor, Jawa Barat",https://glints.com/id/opportunities/jobs/ai-engineer/c2bc2467-99b7-4220-8d3e-bc4e110f1d2c?utm_referrer=explore&traceInfo=14455c80-b446-4146-8439-445177ca015e,Glints,"Deskripsi pekerjaan AI Engineer Pt Boer Technology
-Kualifikasi:
-Pendidikan minimal D3 bidang teknik informatika, sistem informasi, ilmu komputer, teknologi informasi, statistika, matematika, teknik industri atau jurusan setara terkait bidang studi Information Technology.
-Pengalaman kerja minimal 2 tahun di bidang data operation atau development.
-Pengalaman dan menguasai dalam mengelola infrastruktur configuration (server & network), OS configuration (Linux & Windows servers), containerized ecosystem (Docker, Kubernetes).
-Pengalaman dan menguasai dalam mengelola API berbasis GraphQL 
-Pengalaman dan menguasai di level advanced / professional terkait platform database dan kubernetes. 
-Menguasai query dan optimasi SQL & NOSQL (database cluster & non-cluster) 
-Menguasai teknologi CI/CD seperti Jenkins dan Bamboo untuk mendukung proses deployment model dan aplikasi AI/ML
-Menguasai teknologi automation seperti Ansible 
-Menguasai configuration dan optimasi platform data berbasis containerized API (high availability dan clustering) 
-Melakukan analisis data growth dan traffic service untuk memberikan suggestion terkait capacity planning dan management
-Mampu menyusun dan mempresentasikan analisa, rekomendasi & insight terkait aplikasi berbasis containerized API secara keseluruhan kepada tim teknis dan bisnis atau non-teknis dalam bentuk presentasi, dokumen, atau reguler report 
-Melakukan pengecekan di level detail object platform aplikasi berbasis containerized API untuk mengidentifikasi suatu atau potensi issue / problem. Memiliki kemampuan menentukan solusi permanen sebagai langkah solving issue maupun langkah perbaikan berkelanjutan 
-Menguasai proses automasi (monitoring, alert, notification, analisis) terkait dengan platform berbasis containerized API 
-Menguasai performance improvement dan tuning pada platform data berbasis web server, API, Tableau Server, 
-Micosoft Reporting Service maupun server untuk memenuhi kebutuhan platform 
-Menguasai tools yang digunakan untuk menjalankan daily operations seperti ELK Stack, Grafana, DB Monitoring, Confluence, JIRA"
-AI Engineer,PT Abhimantra Sistem Solusindo,"Tebet, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/0ceb49d9-ac40-4dbb-b81d-31387a7d18d6?utm_referrer=explore&traceInfo=14455c80-b446-4146-8439-445177ca015e,Glints,"Deskripsi pekerjaan AI Engineer PT Abhimantra Sistem Solusindo
-Job Descriptions
-Mengembangkan dan mengimplementasikan model AI/ML untuk kebutuhan analisis data dan chatbot.
-Menangani preprocessing data & deployment model ke production environment.
-Mengoptimalkan kinerja model agar sesuai dengan kebutuhan bisnis dan pengguna akhir.
-Job Requirements
-Min. S1 Teknik Informatika / Data Science / terkait.
-Memiliki sertifikasi BNSP atau sertifikasi resmi instansi pemerintahan terkait AI/ML.
-Menguasai Python (TensorFlow, PyTorch, Scikit-learn).
-Berpengalaman dalam NLP & integrasi model ke sistem produksi.
-Bersedia bekerja sesuai kontrak jangka waktu proyek."
-AI Engineer,Zando Agency,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/ai-engineer/3dde16f6-58fc-437b-a631-acd51a6c807d?utm_referrer=explore&traceInfo=14455c80-b446-4146-8439-445177ca015e,Glints,"Deskripsi pekerjaan AI Engineer Zando Agency
-Kamu siap bangun masa depan bareng tim yang gesit, kreatif, dan haus inovasi? Kamu tipe yang excited lihat model performance naik, suka ngulik prompt sampe tengah malem, dan selalu penasaran gimana AI bisa nge-boost bisnis, maka Zando mau ketemu kamu!
-Tanggung Jawab Utama
-1. Menganalisis masalah bisnis yang kompleks dan mengubahnya menjadi permasalahan AI yang dapat diselesaikan secara teknis.
-2. Mendesain, membangun, dan mengimplementasikan aplikasi AI end-to-end menggunakan framework modern seperti LangChain, LangGraph, dan berbagai platform orkestrasi AI.
-3. Mengembangkan dan menyempurnakan Large Language Models (LLMs) serta mengoptimalkan performa melalui teknik prompt engineering untuk berbagai kebutuhan seperti otomatisasi proses, pembuatan konten, dan pengembangan kode.
-Kualifikasi
-1. Lulusan S1 atau lebih tinggi di bidang Ilmu Komputer, Matematika, Statistika, atau bidang teknis terkait.
-2. Memiliki 3–5 tahun pengalaman di bidang AI, Machine Learning, atau Data Science.
-3. Mahir dalam Python dan memiliki pengalaman dengan framework AI/ML seperti OpenAI APIs, LangChain, atau LangGraph.
-4. Pengalaman dalam deploy aplikasi di platform cloud seperti AWS, GCP, atau Azure.
-5. Pemahaman mendalam mengenai LLMs, orkestrasi AI, dan teknik prompt engineering.
-6. 
-Pernah membangun dan mengimplementasikan solusi AI end-to-end secara langsung
- (nilai plus)
-7. 
-Pengalaman dalam pengembangan front-end menggunakan framework seperti React atau Vue.js
- (nilai plus)
-8. Siap bergabung secepatnya dan penempatan di PIK 1, Jakarta Utara"
-Data Scientist,PT Imani Prima,"Pasar Minggu, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/85b12236-bfd5-4487-a2d8-ede761f74fb6?utm_referrer=explore&traceInfo=02e039ad-6a11-440d-b62b-82a4d289e667,Glints,"Deskripsi pekerjaan Data Scientist PT Imani Prima
-Key Responsibilities:
-Perform data preprocessing, exploration, and visualization.
-Conduct statistical analysis, anomaly detection, diagnostic analysis, and time-series modeling.
-Develop clustering, classification, and regression models using neural networks for both visual data (images/videos) and text data (documents).
-Maintain and improve existing AI/analytics services in production.
-Explore and research advanced topics in computer vision, text analytics, and large language models (LLMs).
-Requirements:
-Minimum Bachelor’s degree in Computer Science, Informatics Engineering, Statistics, Mathematics, Data Science, or a related field.
-Minimum 2 years of relevant experience (fresh graduates are welcome to apply).
-Solid understanding of statistics, probability, and data analysis fundamentals.
-Knowledge of regression, classification, and feature engineering techniques.
-Experience developing AI/Machine Learning solutions on Linux using Python and related libraries.
-Proficient with data analytics tools such as JupyterLab or Google Colab.
-Hands-on experience with computer vision models for object detection (YOLO, R-CNN) and face analytics (detection, recognition, liveness).
-Familiar with LangChain and LLM orchestration tools such as Flowise, Ragflow, or Langflow."
-Data Scientist,PT Adi Perdana Nusantara,"Kemayoran, Jakarta Pusat, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/43cb20c2-4f10-49e1-b96d-6291f3685f6b?utm_referrer=explore&traceInfo=02e039ad-6a11-440d-b62b-82a4d289e667,Glints,"Deskripsi pekerjaan Data Scientist PT Adi Perdana Nusantara
+Data Scientist,PT. Hypefast Karya Nusantara,"Setiabudi, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/12f1978a-aeaa-4cbb-9d83-b5404498c2de?utm_referrer=explore&traceInfo=b0dc775a-8ec0-4e9c-b334-dab651330f4a,Glints,"Deskripsi pekerjaan Data Scientist PT. Hypefast Karya Nusantara
+Lead end-to-end deployment of advanced analytics pipeline, collaborating with product managers, data engineering, or backend engineer team
+Translating business needs to data science problems, and performing experiments to validate the hypothesis
+Develop machine learning models (ML)/advanced analytics algorithms using state-of-the-art methods
+Design analytics framework (ML and statistical model) for various use cases
+Maintain the quality and execution of the analytics models for various products
+Perform periodic review on the implementation of the model and data pipeline
+Collaborate with analytics team to advice on the usage of Hypefast data asset to solve business problems
+Perform exploratory data analysis on various data sources to get new insights to improve and give recommendation for new product development or online experimentation
+Discuss and align with stakeholders on key product metrics, design and propose experimentation strategies
+Launch A/B tests, analyze experiment results and provide recommendations"
+Data Scientist,Dnalytics Consulting,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/f73ba6cd-1751-4a04-a61a-25c7321704b8?utm_referrer=explore&traceInfo=b0dc775a-8ec0-4e9c-b334-dab651330f4a,Glints,"Deskripsi pekerjaan Data Scientist Dnalytics Consulting
+We are looking Energetic Candidate with :
+Bachelor of Engineering (Computer / Telecommunication), Computer Science / Information Technology, Mathematics, Statistics or equivalent.
+Have at least 3 year of experience in the appropriate field for this position
+Mastering Python and R.
+Understand Machine Learning is a must.
+Understand the concept of Data Mining well.
+Understanding the concept of OLAP an having experince in designing DWH and Datamart
+Experienes as a DBA will be an advantage
+Good Team work with the team.
+Can translate and understand scientific papers or jurals.
+Able to work under pressure.
+Have good communication skills (oral and written)
+Able to speak English well (oral and written).
+Have the ability to solve problems.
+Honest, responsible and have a good work ethic.
+The roles and responsibilities for this position are:
+Presentation Skill of technology products related to data (Data Warehouse, Data Analytics, and Data Visualization)
+Responsible to Create reports and documentation of customer case analysis
+Capable to do data retrieval and pre-processing from various sources
+Understand how to make business case analysis and how to utilize enterprise level data for business insight and give value for the company and for the client.
+Develop business and machine-learning model from data owned by the company and / or client."
+Data Scientist,Pt Uniair Indotama Cargo,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/7f11eb82-174b-4641-ad15-63ad7f82810e?utm_referrer=explore&traceInfo=b0dc775a-8ec0-4e9c-b334-dab651330f4a,Glints,"Deskripsi pekerjaan Data Scientist Pt Uniair Indotama Cargo
+About The Role :
+Planning and executing projects, following through the entire software development lifecycle.
+Collaboratively work with internal stakeholder, project team members and partners in defining business & technical requirements and specifications.
+Work with the project team to translate requirements into project deliverables & prioritization.
+Develop and implement machine learning models to solve business problems.
+Lead functional discussions and leverage your knowledge of best practices
+perform project Researche & Development Releted to AI/ML.
+What we are looking for:
+Bachelor's or Master's degree in Data Science, Computer Science, or a related field.
+At least 2 years of experience in the area of Data Science or related roles.
+Strong proficiency in programming languages such as Python and SQL.
+Familiarity with Machine Learning frameworks like Deep Learning, Tensor Flow, Pytorch, and Generative AI.
+Hands-on and successful project delivery experience related to artificial intelligence or machine learning.
+Experience with cloud platforms Alibaba, AWS, GCP, Azure, or similar platforms.
+Self-motivated with a passion for continuous learning in the rapidly evolving field of AI/ML"
+Data Scientist,PT Suitmedia Kreasi Indonesia,"Pasar Minggu, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/a5cf365a-1e8e-4cfd-a59b-8fce3289bba5?utm_referrer=explore&traceInfo=b0dc775a-8ec0-4e9c-b334-dab651330f4a,Glints,"Deskripsi pekerjaan Data Scientist PT Suitmedia Kreasi Indonesia
+Role:
+You will deliver actionable insights and predictive models to solve business problems.
+Responsibilities:
+- Analyse structured and unstructured data to identify trends and patterns.
+- Build and validate machine learning models (classification, regression, clustering, etc.).
+- Communicate findings through reports and visualizations.
+- Collaborate with business teams to define problem statements and success metrics.
+- Deploy models and monitor performance in production environments (if needed).
+Qualifications:
+- Minimum 3 years experience in data scientist
+- Proficiency in Python or R, with libraries like scikit-learn, pandas, NumPy, etc.
+- Experience with ML lifecycle: data prep, modelling, evaluation, and deployment.
+- Familiarity with cloud ML platforms (AWS SageMaker).
+- Strong statistical and analytical thinking.
+- Bonus: Experience with Model Deployment
+This position is prioritized for Jakarta office."
+Data Scientist,PT Adi Perdana Nusantara,"Kemayoran, Jakarta Pusat, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/43cb20c2-4f10-49e1-b96d-6291f3685f6b?utm_referrer=explore&traceInfo=b0dc775a-8ec0-4e9c-b334-dab651330f4a,Glints,"Deskripsi pekerjaan Data Scientist PT Adi Perdana Nusantara
 Hello Everyone, We’re Hiring! 
 ✨ 
 PT ADI Perdana Nusantara
@@ -129,52 +179,3 @@ Relevant certifications (e.g., Google Data Analytics, IBM Data Science).
 📞 Only shortlisted candidates will be contacted (Indonesia Citizen Only)
 ✨ Don’t miss the opportunity to join our dynamic and growing team.
 Take your career to the next level with us! 🚀"
-Data Scientist,Dnalytics Consulting,"Penjaringan, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/f73ba6cd-1751-4a04-a61a-25c7321704b8?utm_referrer=explore&traceInfo=02e039ad-6a11-440d-b62b-82a4d289e667,Glints,"Deskripsi pekerjaan Data Scientist Dnalytics Consulting
-We are looking Energetic Candidate with :
-Bachelor of Engineering (Computer / Telecommunication), Computer Science / Information Technology, Mathematics, Statistics or equivalent.
-Have at least 3 year of experience in the appropriate field for this position
-Mastering Python and R.
-Understand Machine Learning is a must.
-Understand the concept of Data Mining well.
-Understanding the concept of OLAP an having experince in designing DWH and Datamart
-Experienes as a DBA will be an advantage
-Good Team work with the team.
-Can translate and understand scientific papers or jurals.
-Able to work under pressure.
-Have good communication skills (oral and written)
-Able to speak English well (oral and written).
-Have the ability to solve problems.
-Honest, responsible and have a good work ethic.
-The roles and responsibilities for this position are:
-Presentation Skill of technology products related to data (Data Warehouse, Data Analytics, and Data Visualization)
-Responsible to Create reports and documentation of customer case analysis
-Capable to do data retrieval and pre-processing from various sources
-Understand how to make business case analysis and how to utilize enterprise level data for business insight and give value for the company and for the client.
-Develop business and machine-learning model from data owned by the company and / or client."
-Data Scientist,Pt Uniair Indotama Cargo,"Tanjung Priok, Jakarta Utara, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/7f11eb82-174b-4641-ad15-63ad7f82810e?utm_referrer=explore&traceInfo=02e039ad-6a11-440d-b62b-82a4d289e667,Glints,"Deskripsi pekerjaan Data Scientist Pt Uniair Indotama Cargo
-About The Role :
-Planning and executing projects, following through the entire software development lifecycle.
-Collaboratively work with internal stakeholder, project team members and partners in defining business & technical requirements and specifications.
-Work with the project team to translate requirements into project deliverables & prioritization.
-Develop and implement machine learning models to solve business problems.
-Lead functional discussions and leverage your knowledge of best practices
-perform project Researche & Development Releted to AI/ML.
-What we are looking for:
-Bachelor's or Master's degree in Data Science, Computer Science, or a related field.
-At least 2 years of experience in the area of Data Science or related roles.
-Strong proficiency in programming languages such as Python and SQL.
-Familiarity with Machine Learning frameworks like Deep Learning, Tensor Flow, Pytorch, and Generative AI.
-Hands-on and successful project delivery experience related to artificial intelligence or machine learning.
-Experience with cloud platforms Alibaba, AWS, GCP, Azure, or similar platforms.
-Self-motivated with a passion for continuous learning in the rapidly evolving field of AI/ML"
-Data Scientist,PT. Hypefast Karya Nusantara,"Setiabudi, Jakarta Selatan, DKI Jakarta",https://glints.com/id/opportunities/jobs/data-scientist/12f1978a-aeaa-4cbb-9d83-b5404498c2de?utm_referrer=explore&traceInfo=02e039ad-6a11-440d-b62b-82a4d289e667,Glints,"Deskripsi pekerjaan Data Scientist PT. Hypefast Karya Nusantara
-Lead end-to-end deployment of advanced analytics pipeline, collaborating with product managers, data engineering, or backend engineer team
-Translating business needs to data science problems, and performing experiments to validate the hypothesis
-Develop machine learning models (ML)/advanced analytics algorithms using state-of-the-art methods
-Design analytics framework (ML and statistical model) for various use cases
-Maintain the quality and execution of the analytics models for various products
-Perform periodic review on the implementation of the model and data pipeline
-Collaborate with analytics team to advice on the usage of Hypefast data asset to solve business problems
-Perform exploratory data analysis on various data sources to get new insights to improve and give recommendation for new product development or online experimentation
-Discuss and align with stakeholders on key product metrics, design and propose experimentation strategies
-Launch A/B tests, analyze experiment results and provide recommendations"
