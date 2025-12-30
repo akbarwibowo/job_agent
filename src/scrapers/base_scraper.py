@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 from playwright.async_api import async_playwright, BrowserContext
 from dotenv import load_dotenv, find_dotenv
-from src.scrapers.base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 
 load_dotenv(find_dotenv())
@@ -94,7 +93,7 @@ class Scraper(ABC):
 
             consumers = [asyncio.create_task(self.worker(context, queue, all_jobs)) for _ in range(5)]
 
-            limit_per_job = limit // len(job_titles) if limit is not None else 100
+            limit_per_job = limit // len(job_titles) if limit and job_titles is not None else 100
             # TODO improve efficiency
             for title in job_titles:
                 for location in locations:
@@ -189,6 +188,13 @@ class Scraper(ABC):
             await queue.join()
             for c in consumers:
                 c.cancel()
+            
+            # Wait for all consumers to be cancelled
+            try:
+                await asyncio.gather(*consumers)
+            except asyncio.CancelledError:
+                logging.info("All consumer tasks have been cancelled")
+                
             await browser.close()
             return all_jobs
 
@@ -210,7 +216,7 @@ class Scraper(ABC):
                         pass
 
                     content = await page.content()
-                    soup = BeautifulSoup(content, soup = BeautifulSoup(content, "html.parser"))
+                    soup = BeautifulSoup(content, "html.parser")
 
                     job_desc_element = soup.find("div", attrs=({"class": self.job_desc_class}))
 
