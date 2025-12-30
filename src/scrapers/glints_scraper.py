@@ -3,11 +3,11 @@ import logging
 import os
 from typing import List, Dict, Any
 from playwright.async_api import async_playwright
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from src.scrapers.base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 class GlintsScraper(BaseScraper):
     def __init__(self):
