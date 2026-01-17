@@ -35,26 +35,26 @@ class Scraper(ABC):
             base_url: str, 
             platform_name: str, 
             search_page_url: str, 
-            job_desc_class: str, 
+            job_desc_selector: str, 
             search_splitter: str,
-            search_results_class: str,
-            job_title_class: str,
-            company_name_class: str,
-            location_class: str,
-            date_posted_class: str | None = None,
-            pagination_next_button_class: str | None = None
+            search_results_selector: str,
+            job_title_selector: str,
+            company_name_selector: str,
+            location_selector: str,
+            date_posted_selector: str | None = None,
+            pagination_next_button_selector: str | None = None
             ) -> None:
         self.base_url: str = base_url
         self.platform_name: str = platform_name
         self.search_page_url: str = search_page_url
-        self.job_desc_class: str = job_desc_class
+        self.job_desc_selector: str = job_desc_selector
         self.search_splitter: str = search_splitter
-        self.search_results_class: str = search_results_class
-        self.job_title_class: str = job_title_class
-        self.company_name_class: str = company_name_class
-        self.location_class: str = location_class
-        self.date_posted_class: str | None = date_posted_class
-        self.pagination_next_button_class: str | None = pagination_next_button_class
+        self.search_results_selector: str = search_results_selector
+        self.job_title_selector: str = job_title_selector
+        self.company_name_selector: str = company_name_selector
+        self.location_selector: str = location_selector 
+        self.date_posted_selector: str | None = date_posted_selector
+        self.pagination_next_button_selector: str | None = pagination_next_button_selector
 
 
     def scrape(self, job_titles: List[str], locations: List[str], remote_only: bool, limit: int | None = None) -> List[Dict[str, Any]]:
@@ -144,14 +144,14 @@ class Scraper(ABC):
                         await page.goto(search_url, timeout=60000)
 
                         try:
-                            await page.wait_for_selector(self.search_results_class, timeout=10000)
+                            await page.wait_for_selector(self.search_results_selector, timeout=10000)
                         except Exception as e:
                             logging.error(f"Search results did not load properly: {e}")
                         
                         last_height: str = await page.evaluate(SCROLL_HEIGHT_SCRIPT)
                         seen_job_urls: set[str | None] = set()
                         while True:
-                            job_lists: List[ElementHandle] = await page.query_selector_all(self.search_results_class)
+                            job_lists: List[ElementHandle] = await page.query_selector_all(self.search_results_selector)
                             new_jobs_found_in_this_batch = False
 
                             for job_list in job_lists:
@@ -165,10 +165,10 @@ class Scraper(ABC):
                                     seen_job_urls.add(job_url)
                                     new_jobs_found_in_this_batch = True
 
-                                    title_element: ElementHandle | None = await job_list.query_selector(self.job_title_class)
-                                    company_element: ElementHandle | None = await job_list.query_selector(self.company_name_class)
-                                    location_element: ElementHandle | None = await job_list.query_selector(self.location_class)
-                                    date_posted_element: ElementHandle | None = await job_list.query_selector(self.date_posted_class) if self.date_posted_class else None
+                                    title_element: ElementHandle | None = await job_list.query_selector(self.job_title_selector)
+                                    company_element: ElementHandle | None = await job_list.query_selector(self.company_name_selector)
+                                    location_element: ElementHandle | None = await job_list.query_selector(self.location_selector)
+                                    date_posted_element: ElementHandle | None = await job_list.query_selector(self.date_posted_selector) if self.date_posted_selector else None
 
                                     job_info: dict = {
                                         "title": (await title_element.inner_text()).strip() if title_element else "N/A",
@@ -192,7 +192,7 @@ class Scraper(ABC):
                             if len(seen_job_urls) >= limit_per_job:
                                 break
 
-                            if not self.pagination_next_button_class:
+                            if not self.pagination_next_button_selector:
                                 await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                                 await page.wait_for_timeout(2000)
 
@@ -204,7 +204,7 @@ class Scraper(ABC):
                             else:
                                 # flow if there is pagination button
                                 # TODO: be caution with this loop
-                                next_button: ElementHandle | None = await page.query_selector(self.pagination_next_button_class)
+                                next_button: ElementHandle | None = await page.query_selector(self.pagination_next_button_selector)
                                 if next_button:
                                     # click the next button if available
                                     await next_button.click()
@@ -220,7 +220,7 @@ class Scraper(ABC):
                                             logging.info("No more new jobs found, ending search.")
                                             break
                                         last_height = new_height
-                                        next_button = await page.query_selector(self.pagination_next_button_class)
+                                        next_button = await page.query_selector(self.pagination_next_button_selector)
                                         if next_button:
                                             await next_button.click()
                                             await page.wait_for_timeout(3000)
@@ -267,9 +267,9 @@ class Scraper(ABC):
                     content: str = await page.content()
                     soup = BeautifulSoup(content, "html.parser")
 # TODO check for the bs4 selector
-                    selector: str = self.job_desc_class
-                    if selector and not selector.startswith((".", "#", "[", ":")):
-                        selector = f".{selector}"
+                    selector: str = self.job_desc_selector
+                    # if selector and not selector.startswith((".", "#", "[", ":")):
+                    #     selector = f".{selector}"
                     job_desc_element: Tag | None = soup.select_one(selector) if selector else None
 
                     if job_desc_element:
